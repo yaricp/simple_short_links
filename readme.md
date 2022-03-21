@@ -15,7 +15,7 @@ For local development:
 
 ## Before start
 
-Put to project file .env with follow variables:
+1. Put to project file .env with follow variables:
 
 ```bash
 DOCKER_IMAGE_BACKEND=api
@@ -43,6 +43,13 @@ PGADMIN_DEFAULT_EMAIL=admin@admin.ru
 PGADMIN_DEFAULT_PASSWORD=admin
 ```
 
+2. Make migration of database:
+
+```bash
+
+sudo docker-compose run backend scripts/./migrate.sh
+sudo docker-compose down
+```
 
 
 ## Start stack
