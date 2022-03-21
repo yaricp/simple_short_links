@@ -47,7 +47,7 @@ PGADMIN_DEFAULT_PASSWORD=admin
 
 ```bash
 
-sudo docker-compose run backend scripts/./migrate.sh
+sudo docker-compose run backend alembic upgrade head
 sudo docker-compose down
 ```
 
