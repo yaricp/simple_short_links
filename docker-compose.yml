@@ -1,0 +1,41 @@
+version: "3.3"
+services:
+
+  db:
+    image: postgres:12
+    volumes:
+      - app-db-data:/var/lib/postgresql/data/pgdata
+    env_file:
+      - .env
+    environment:
+      - PGDATA=/var/lib/postgresql/data/pgdata
+
+  pgadmin:
+    image: dpage/pgadmin4
+    depends_on:
+      - db
+    ports:
+      - "5050:5050"
+    env_file:
+      - .env
+
+  backend:
+    image: 'short_links_rest_api:latest'
+    ports:
+      - "8080:80"
+    volumes:
+      - ./:/app
+    depends_on:
+      - db
+    env_file:
+      - .env
+#    environment:
+#      - SERVER_NAME=${DOMAIN?Variable not set}
+#      - SERVER_HOST=https://${DOMAIN?Variable not set}
+#      # Allow explicit env var override for tests
+#      - SMTP_HOST=${SMTP_HOST}
+    build:
+      context: .
+
+volumes:
+  app-db-data:
